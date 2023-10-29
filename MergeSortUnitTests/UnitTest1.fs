@@ -1,5 +1,6 @@
 module MergeSortUnitTests
 
+open System
 open NUnit.Framework
 open FsCheck.NUnit
 
@@ -10,18 +11,17 @@ let Setup () = ()
 let TopDownMergeSortedRuns (left: int[]) (right: int[]) =
     Array.sortInPlace left
     Array.sortInPlace right
-    let A = Array.concat [| left; right |]
-    let B = Array.zeroCreate A.Length
-    MergeSort.TopDown.topDownMergeSortedRuns A B 0 left.Length A.Length
+    let B = Array.zeroCreate (left.Length + right.Length)
+    MergeSort.TopDown.topDownMergeSortedRuns (ReadOnlySpan left) (ReadOnlySpan right) (Span B)
     printfn $"left %A{left}"
     printfn $"right %A{right}"
-    printfn $"input array %A{A}"
     printfn $"output array %A{B}"
-    B = Array.sort A
+    B = Array.sort (Array.concat [| left; right |])
 
 [<Property>]
 let TopDownMergeLengthTwo a b =
     let A = [| a; b |]
+    printfn $"input array %A{A}"
     let sorted = Array.sort A
     MergeSort.TopDown.sortInPlace A
     printfn $"output array %A{A}"
