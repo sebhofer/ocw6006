@@ -2,35 +2,42 @@
 
 module TopDown =
 
-    /// Merge two sorted runs from B into A
-    let topDownMerge (B: int[]) (A: int[]) startInclusive middle endExclusive =
+    /// Merge two sorted runs from source into target
+    let topDownMergeSortedRuns (source: int[]) (target: int[]) startInclusive middle endExclusive =
         let mutable i = middle - 1 // index left run
         let mutable j = endExclusive - 1 // index right run
         let mutable k = endExclusive - 1 // index in A
 
         while k >= startInclusive do
-            if i >= 0 && (j < middle || B[i] > B[j]) then
-                A[k] <- B[i]
+            if i >= startInclusive && (j < middle || source[i] > source[j]) then
+                target[k] <- source[i]
                 i <- i - 1
-            elif j >= 0 then
-                A[k] <- B[j]
+            else
+                target[k] <- source[j]
                 j <- j - 1
 
             k <- k - 1
 
     /// Split A[] into 2 runs, sort both runs into B[], merge both runs from B[] to A[]
-    let rec topDownSplitMergeInPlace (B: int[]) (A: int[]) startInclusive endExclusive =
+    let rec topDownSplitMergeInPlace (source: int[]) (target: int[]) startInclusive endExclusive =
         if endExclusive - startInclusive <= 1 then
             ()
         else
+            printfn "rec"
+            printfn $"source %A{source}"
+            printfn $"target %A{target}"
             let middle = (startInclusive + endExclusive) / 2
-            topDownSplitMergeInPlace B A startInclusive middle
-            topDownSplitMergeInPlace B A middle endExclusive
-            topDownMerge A B startInclusive middle endExclusive
+            topDownSplitMergeInPlace source target startInclusive middle
+            topDownSplitMergeInPlace source target middle endExclusive
+            topDownMergeSortedRuns target source startInclusive middle endExclusive
+            printfn $"source %A{source}"
+            printfn $"target %A{target}"
 
     let sortInPlace (A: int[]) =
         let B = Array.copy A
         topDownSplitMergeInPlace A B 0 A.Length
+        printfn "A %A" A 
+        printfn "B %A" B 
 
 module BottomUp =
 
