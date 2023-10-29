@@ -54,7 +54,7 @@ module BottomUp =
         let mutable width = 1
         let mutable source = A
         let mutable target = B
-
+        
         while width < n do
             let mutable i = 0
 
@@ -63,7 +63,15 @@ module BottomUp =
                 i <- i + 2 * width
 
             width <- 2 * width
-            Array.blit B 0 A 0 B.Length
+            
+            // swap source and target to avoid copying
+            let source' = source
+            source <- target
+            target <- source'
+            
+        // at this point source is the sorted array 
+        if not (LanguagePrimitives.PhysicalEquality source A) then
+            Array.blit source 0 target 0 source.Length
             
     let sortInPlace (A: int[]) =
         let B = Array.zeroCreate A.Length
