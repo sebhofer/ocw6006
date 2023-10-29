@@ -52,12 +52,14 @@
 
         let bottomUpMergeSort (A: int[]) (B: int[]) n =
             let mutable width = 1
+            let mutable source = A
+            let mutable target = B
 
             while width < n do
                 let mutable i = 0
 
                 while i < n do
-                    bottomUpMerge A B i (min (i + width) n) (min (i + 2 * width) n)
+                    bottomUpMerge source target i (min (i + width) n) (min (i + 2 * width) n)
                     i <- i + 2 * width
 
                 width <- 2 * width

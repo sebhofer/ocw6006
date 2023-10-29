@@ -1,6 +1,6 @@
 ﻿
 Microsoft Visual Studio Solution File, Format Version 12.00
-Project("{F2A71F9B-5D33-465A-A702-920D77279786}") = "OCW6006", "OCW6006\OCW6006.fsproj", "{860213B7-095B-488A-A8A6-FBC23848CEFB}"
+Project("{F2A71F9B-5D33-465A-A702-920D77279786}") = "MergeSort", "MergeSort\MergeSort.fsproj", "{860213B7-095B-488A-A8A6-FBC23848CEFB}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
