@@ -5,10 +5,11 @@
 
         <IsPackable>false</IsPackable>
         <GenerateProgramFile>false</GenerateProgramFile>
+        <RootNamespace>MergeSortUnitTests</RootNamespace>
     </PropertyGroup>
 
     <ItemGroup>
-        <Compile Include="UnitTest1.fs"/>
+        <Compile Include="MergeSortUnitTests.fs" />
         <Compile Include="Program.fs"/>
     </ItemGroup>
 
