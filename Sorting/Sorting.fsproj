@@ -8,6 +8,7 @@
 
     <ItemGroup>
         <Compile Include="MergeSort.fs" />
+        <Compile Include="CountingSort.fs" />
         <Compile Include="Program.fs" />
     </ItemGroup>
 
