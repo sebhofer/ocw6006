@@ -23,7 +23,7 @@
     </ItemGroup>
 
     <ItemGroup>
-      <ProjectReference Include="..\MergeSort\MergeSort.fsproj" />
+      <ProjectReference Include="..\Sorting\Sorting.fsproj" />
     </ItemGroup>
 
 </Project>

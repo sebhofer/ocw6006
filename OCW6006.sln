@@ -1,6 +1,6 @@
 ﻿
 Microsoft Visual Studio Solution File, Format Version 12.00
-Project("{F2A71F9B-5D33-465A-A702-920D77279786}") = "MergeSort", "MergeSort\MergeSort.fsproj", "{860213B7-095B-488A-A8A6-FBC23848CEFB}"
+Project("{F2A71F9B-5D33-465A-A702-920D77279786}") = "Sorting", "Sorting\Sorting.fsproj", "{860213B7-095B-488A-A8A6-FBC23848CEFB}"
 EndProject
 Project("{F2A71F9B-5D33-465A-A702-920D77279786}") = "UnitTests", "UnitTests\UnitTests.fsproj", "{090FDE4A-585F-4823-9CF1-4BF943C1D868}"
 EndProject

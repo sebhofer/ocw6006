@@ -3,6 +3,7 @@ module MergeSortUnitTests
 open System
 open NUnit.Framework
 open FsCheck.NUnit
+open OCW6006
 
 [<SetUp>]
 let Setup () = ()
