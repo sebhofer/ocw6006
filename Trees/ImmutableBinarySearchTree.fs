@@ -27,10 +27,10 @@ let createRoot (key, value) =
       Left = None
       Right = None }
 
-let rec insertLeaf (root: Node<'key, 'value>) (keyValue: 'key * 'value) =
+let rec insert (root: Node<'key, 'value>) (keyValue: 'key * 'value) =
     let conditionalInsert parent subtree =
         match subtree with
-        | Some subtree -> insertLeaf subtree keyValue
+        | Some subtree -> insert subtree keyValue
         | None -> createLeaf parent keyValue
         |> Some
 
@@ -44,7 +44,7 @@ let rec insertLeaf (root: Node<'key, 'value>) (keyValue: 'key * 'value) =
             Right = conditionalInsert root root.Right }
 
 let ofList (items: ('key * 'value) list) =
-    List.fold insertLeaf (createRoot items[0]) items[1..]
+    List.fold insert (createRoot items[0]) items[1..]
 
 // move to Sequence
 let inorderAccumulation (node: Node<'key, 'data>) =
@@ -83,7 +83,7 @@ let last (node: Node<_, _>) =
 
 let rec tryFind key (node: Node<'key, 'value>) =
     if node.Key = key then
-        Some node.Value
+        Some node
     elif key < node.Key then
         node.Left |> Option.bind (tryFind key)
     else

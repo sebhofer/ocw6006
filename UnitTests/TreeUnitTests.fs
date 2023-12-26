@@ -1,11 +1,9 @@
 module TreeUnitTests
 
-open System
 open FsCheck
 open Microsoft.FSharp.Collections
 open NUnit.Framework
 open FsCheck.NUnit
-open OCW6006
 
 module ImmutableBinarySearchTree =
 
@@ -28,7 +26,7 @@ module ImmutableBinarySearchTree =
 
         for key, value in inputList do
             match ImmutableBinarySearchTree.tryFind key tree with
-            | Some v -> v = value
+            | Some v -> v.Value = value
             | None -> false
             |> Assert.True
 
