@@ -4,6 +4,8 @@ Project("{F2A71F9B-5D33-465A-A702-920D77279786}") = "Sorting", "Sorting\Sorting.
 EndProject
 Project("{F2A71F9B-5D33-465A-A702-920D77279786}") = "UnitTests", "UnitTests\UnitTests.fsproj", "{090FDE4A-585F-4823-9CF1-4BF943C1D868}"
 EndProject
+Project("{F2A71F9B-5D33-465A-A702-920D77279786}") = "Trees", "Trees\Trees.fsproj", "{2F016D54-9ABA-4B46-B021-D252101B466B}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -18,5 +20,9 @@ Global
 		{090FDE4A-585F-4823-9CF1-4BF943C1D868}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{090FDE4A-585F-4823-9CF1-4BF943C1D868}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{090FDE4A-585F-4823-9CF1-4BF943C1D868}.Release|Any CPU.Build.0 = Release|Any CPU
+		{2F016D54-9ABA-4B46-B021-D252101B466B}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{2F016D54-9ABA-4B46-B021-D252101B466B}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{2F016D54-9ABA-4B46-B021-D252101B466B}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{2F016D54-9ABA-4B46-B021-D252101B466B}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 EndGlobal

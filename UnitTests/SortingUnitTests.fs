@@ -1,6 +1,7 @@
 module SortingUnitTests
 
 open System
+open FsCheck
 open NUnit.Framework
 open FsCheck.NUnit
 open OCW6006

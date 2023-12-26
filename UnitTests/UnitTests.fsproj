@@ -10,6 +10,7 @@
 
     <ItemGroup>
         <Compile Include="SortingUnitTests.fs" />
+        <Compile Include="TreeUnitTests.fs" />
         <Compile Include="Program.fs"/>
     </ItemGroup>
 
@@ -24,6 +25,7 @@
 
     <ItemGroup>
       <ProjectReference Include="..\Sorting\Sorting.fsproj" />
+      <ProjectReference Include="..\Trees\Trees.fsproj" />
     </ItemGroup>
 
 </Project>
