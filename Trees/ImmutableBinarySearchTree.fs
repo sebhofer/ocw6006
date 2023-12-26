@@ -81,12 +81,20 @@ let last (node: Node<_, _>) =
 
     walk node
 
+let rec tryFind key (node: Node<'key, 'value>) =
+    if node.Key = key then
+        Some node.Value
+    elif key < node.Key then
+        node.Left |> Option.bind (tryFind key)
+    else
+        node.Right |> Option.bind (tryFind key)
+
 let rec trySuccessor (node: Node<_, _>) =
     match node.Right with
-    | Some right -> Some (first right)
+    | Some right -> Some(first right)
     | None -> Option.bind trySuccessor node.Parent
 
 let rec tryPredecessor (node: Node<_, _>) =
     match node.Left with
-    | Some left -> Some (last left)
+    | Some left -> Some(last left)
     | None -> Option.bind tryPredecessor node.Parent
