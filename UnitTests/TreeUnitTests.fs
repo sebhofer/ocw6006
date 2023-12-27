@@ -9,6 +9,10 @@ module ImmutableBinarySearchTree =
 
     open Trees
 
+    let createInputList (inputs: int[]) =
+        let rand = System.Random()
+        inputs |> Array.map (fun e -> rand.Next(), e) |> List.ofArray
+
     [<Property>]
     let createAndRetrieveSortedList (NonEmptyArray input: NonEmptyArray<int * int>) =
         let inputList = List.ofArray input
@@ -19,9 +23,8 @@ module ImmutableBinarySearchTree =
         |> (=) sortedByKeys
 
     [<Property>]
-    let tryFind (NonEmptyArray input: NonEmptyArray<int * int>) =
-        let inputList = List.ofArray input |> List.distinctBy fst
-
+    let tryFind (NonEmptyArray input: NonEmptyArray<int>) =
+        let inputList = createInputList input
         let tree = inputList |> ImmutableBinarySearchTree.ofList
 
         for key, value in inputList do
@@ -32,23 +35,23 @@ module ImmutableBinarySearchTree =
 
     [<Property>]
     let first (NonEmptyArray input: NonEmptyArray<int>) =
-        let inputList = List.ofArray input
+        let inputList = createInputList input
 
-        List.zip inputList inputList
+        inputList
         |> ImmutableBinarySearchTree.ofList
         |> ImmutableBinarySearchTree.first
         |> ImmutableBinarySearchTree.value
-        |> (=) (List.min inputList)
+        |> (=) (List.minBy fst inputList |> snd)
 
     [<Property>]
     let last (NonEmptyArray input: NonEmptyArray<int>) =
-        let inputList = List.ofArray input
+        let inputList = createInputList input
 
-        List.zip inputList inputList
+        inputList
         |> ImmutableBinarySearchTree.ofList
         |> ImmutableBinarySearchTree.last
         |> ImmutableBinarySearchTree.value
-        |> (=) (List.max inputList)
+        |> (=) (List.maxBy fst inputList |> snd)
 
     [<Test>]
     let trySuccessorOnSingleton () =
@@ -59,9 +62,9 @@ module ImmutableBinarySearchTree =
 
     [<Property>]
     let trySuccessorOnLast (NonEmptyArray input: NonEmptyArray<int>) =
-        let inputList = List.ofArray input
+        let inputList = createInputList input
 
-        let tree = List.zip inputList inputList |> ImmutableBinarySearchTree.ofList
+        let tree = inputList |> ImmutableBinarySearchTree.ofList
         let lastNode = tree |> ImmutableBinarySearchTree.last
         let successor = lastNode |> ImmutableBinarySearchTree.trySuccessor
 
@@ -76,9 +79,9 @@ module ImmutableBinarySearchTree =
 
     [<Property>]
     let tryPredecessorOnFirst (NonEmptyArray input: NonEmptyArray<int>) =
-        let inputList = List.ofArray input
+        let inputList = createInputList input
 
-        List.zip inputList inputList
+        inputList
         |> ImmutableBinarySearchTree.ofList
         |> ImmutableBinarySearchTree.first
         |> ImmutableBinarySearchTree.tryPredecessor
@@ -86,8 +89,7 @@ module ImmutableBinarySearchTree =
 
     [<Property>]
     let tryPredecessor (NonEmptyArray input: NonEmptyArray<int>) =
-        let inputList = List.ofArray input |> List.distinct
-
+        let inputList = createInputList input
         let sortedInputs = List.sort inputList
 
         let predecessor =
@@ -95,9 +97,9 @@ module ImmutableBinarySearchTree =
 
             match index with
             | 0 -> None
-            | i -> Some sortedInputs[i - 1]
+            | i -> Some(snd sortedInputs[i - 1])
 
-        List.zip inputList inputList
+        inputList
         |> ImmutableBinarySearchTree.ofList
         |> ImmutableBinarySearchTree.tryPredecessor
         |> Option.map ImmutableBinarySearchTree.value
@@ -106,7 +108,7 @@ module ImmutableBinarySearchTree =
 
     [<Property>]
     let trySuccessor (NonEmptyArray input: NonEmptyArray<int>) =
-        let inputList = List.ofArray input |> List.distinct
+        let inputList = createInputList input
         let sortedInputs = List.sort inputList
 
         let predecessor =
@@ -115,9 +117,9 @@ module ImmutableBinarySearchTree =
             if index = inputList.Length - 1 then
                 None
             else
-                Some sortedInputs[index + 1]
+                Some(snd sortedInputs[index + 1])
 
-        List.zip inputList inputList
+        inputList
         |> ImmutableBinarySearchTree.ofList
         |> ImmutableBinarySearchTree.trySuccessor
         |> Option.map ImmutableBinarySearchTree.value
