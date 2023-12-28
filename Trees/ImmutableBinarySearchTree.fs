@@ -116,19 +116,17 @@ let rec delete (key: 'key) (tree: Node<'key, _>) =
         | { Parent = parent
             Left = Some L
             Right = Some({ Left = None; Right = Some X } as successor) } -> // Right child = successor
-            { Key = successor.Key
-              Value = successor.Value
-              Parent = parent
-              Left = Some L
-              Right = Some X }
+            { successor with
+                Parent = parent
+                Left = Some L
+                Right = Some X }
         | { Parent = parent
             Left = Some L
             Right = Some R } ->
             match trySuccessor tree with
             | None -> invalidOp "internal error: node should have a successor"
             | Some successor ->
-                { Parent = parent
-                  Key = successor.Key
-                  Value = successor.Value
-                  Left = Some L
-                  Right = Some(delete successor.Key R) }
+                { successor with
+                    Parent = parent
+                    Left = Some L
+                    Right = Some(delete successor.Key R) }
