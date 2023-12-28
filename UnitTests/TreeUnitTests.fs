@@ -125,3 +125,22 @@ module ImmutableBinarySearchTree =
         |> Option.map ImmutableBinarySearchTree.value
         |> (=) predecessor
         |> Assert.True
+
+    [<Property>]
+    let delete (NonEmptyArray input: NonEmptyArray<int>) =
+        let rand = System.Random(666)
+        let inputList = (rand.Next(), rand.Next()) :: createInputList input
+        let sortedInputs = List.sort inputList
+
+        let tree = inputList |> ImmutableBinarySearchTree.ofList
+
+        for i in 0 .. sortedInputs.Length - 1 do
+            let key, _ = sortedInputs[i]
+            let shortenedList = List.removeAt i sortedInputs |> List.map snd
+
+            let prunedTreeList =
+                tree
+                |> ImmutableBinarySearchTree.delete key
+                |> ImmutableBinarySearchTree.inorderAccumulation
+
+            shortenedList = prunedTreeList |> Assert.True
